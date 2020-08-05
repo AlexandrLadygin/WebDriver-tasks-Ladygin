@@ -19,7 +19,7 @@ public class PastebinTests {
     //Can Win
 
     @Test
-    @Ignore
+
 
     public void creatingNewPaste() {
         String newPasteCodeText = "Hello from WebDriver";
@@ -34,6 +34,7 @@ public class PastebinTests {
     //Bring It On
 
     @Test
+    @Ignore
 
     public void creatingNewPasteWithBashSyntax() {
         String newPasteCodeText = "git config --global user.name  \"New Sheriff in Town\"\n" +

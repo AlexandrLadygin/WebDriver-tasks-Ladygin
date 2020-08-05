@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PastebinHomePage extends AbstractPage {
 
     private static final String HOMEPAGE_URL = "https://pastebin.com/";
+
+
     private String baseXpath = "//*[@class='select2-results__option' and text()='%s']";
 
     public PastebinHomePage(WebDriver driver) {

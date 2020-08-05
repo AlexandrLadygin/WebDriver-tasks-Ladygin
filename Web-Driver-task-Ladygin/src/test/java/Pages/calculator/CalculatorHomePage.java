@@ -14,7 +14,7 @@ public class CalculatorHomePage extends AbstractPage {
 
     private WebDriverWait wait =  new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
     private JavascriptExecutor executor = (JavascriptExecutor)driver;
-    private String baseXpath = "//*[@class='md-select-menu-container md-active md-clickable']//*[contains(text(), '%s')]";
+    private String universalTextForDropDownXpath = "//*[@class='md-select-menu-container md-active md-clickable']//*[contains(text(), '%s')]";
 
     @FindBy(xpath = "//div[@title='Compute Engine']")
     private WebElement xpathComputeEngine;
@@ -90,27 +90,21 @@ public class CalculatorHomePage extends AbstractPage {
     public CalculatorHomePage chooseOperatingSystemSoftware(String choice) {
         wait.until(ExpectedConditions.elementToBeClickable(xpathOperatingSystemSoftwareField));
         xpathOperatingSystemSoftwareField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
     public CalculatorHomePage chooseMachineClass(String choice) {
         wait.until(ExpectedConditions.elementToBeClickable(xpathMachineClassField));
         xpathMachineClassField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
     public CalculatorHomePage chooseMachineType(String choice) {
         wait.until(ExpectedConditions.elementToBeClickable(xpathMachineTypeField));
         xpathMachineTypeField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
@@ -126,45 +120,35 @@ public class CalculatorHomePage extends AbstractPage {
         executor.executeScript("arguments[0].scrollIntoView();", xpathMachineTypeField);
         wait.until(ExpectedConditions.elementToBeClickable(xpathNumberOfGPUsField));
         xpathNumberOfGPUsField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
     public CalculatorHomePage chooseGPUType(String choice) {
         wait.until(ExpectedConditions.elementToBeClickable(xpathGPUTypeField));
         xpathGPUTypeField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
     public CalculatorHomePage chooseLocalSSD(String choice) {
         wait.until(ExpectedConditions.elementToBeClickable(xpathLocalSSDField));
         xpathLocalSSDField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
     public CalculatorHomePage chooseDataCenterLocation(String choice) {
         wait.until(ExpectedConditions.elementToBeClickable(xpathDataCenterLocationField));
         xpathDataCenterLocationField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
     public CalculatorHomePage chooseCommittedUsage(String choice) {
         wait.until(ExpectedConditions.elementToBeClickable(xpathCommittedUsageField));
         xpathCommittedUsageField.click();
-        String fullXpathForElement = String.format(baseXpath, choice);
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
-        driver.findElement(By.xpath(fullXpathForElement)).click();
+        this.selectElementAndClick(choice);
         return this;
     }
 
@@ -196,7 +180,6 @@ public class CalculatorHomePage extends AbstractPage {
         return this;
     }
 
-
     public String getVMClassInfo(){
         return VMClassInfoLine.getText();
     }
@@ -221,8 +204,15 @@ public class CalculatorHomePage extends AbstractPage {
         return TotalEstimatedCostInfoLine.getText();
     }
 
+    private void selectElementAndClick (String selectedOption) {
+        String fullXpathForElement = String.format(universalTextForDropDownXpath, selectedOption);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(fullXpathForElement))));
+        driver.findElement(By.xpath(fullXpathForElement)).click();
+    }
+
     @Override
     public CalculatorHomePage openPage() {
-        throw new RuntimeException("Please don't use  openPage() for CalculatorHomePage!");
+        System.out.println("Please don't use  openPage() for CalculatorHomePage!");
+        return this;
     }
 }

@@ -41,11 +41,11 @@ public class TempEmailPage extends AbstractPage {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].scrollIntoView();", xpathHTMLFormButton);
         xpathHTMLFormButton.click();
-        driver.switchTo().frame(0);
         return  this;
     }
 
     public String getTextFromMessage(){
+        driver.switchTo().frame(0);
         return xpathCostField.getText();
     }
 }
